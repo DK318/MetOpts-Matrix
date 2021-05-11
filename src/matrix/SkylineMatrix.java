@@ -4,7 +4,6 @@ import matrix.exception.MatrixException;
 import utils.Scanner;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class SkylineMatrix implements Matrix {
     private final int n;
@@ -127,33 +126,28 @@ public class SkylineMatrix implements Matrix {
         }
     }
 
-    public static SkylineMatrix LUDecomposition(Path file) throws MatrixException {
-        try (Scanner scanner = new Scanner(file)) {
-            int n = scanner.nextInt();
-            SkylineMatrix matrix = new SkylineMatrix(scanner, n);
-            for (int i = 1; i <= n; i++) {
-                for (int j = 1; j <= n; j++) {
-                    double sum = 0;
-                    if (i <= j) {
-                        for (int k = 1; k <= i - 1; k++) {
-                            sum += matrix.get(i, k) * matrix.get(k, j);
-                        }
-                        double aij = matrix.get(i, j);
-                        matrix.set(i, j, aij - sum);
-                    } else {
-                        for (int k = 1; k <= j - 1; k++) {
-                            sum += matrix.get(i, k) * matrix.get(k, j);
-                        }
-                        double aij = matrix.get(i, j);
-                        double ujj = matrix.get(j, j);
-                        matrix.set(i, j, (aij - sum) / ujj);
+    public static SkylineMatrix LUDecomposition(Scanner scanner, int n) throws MatrixException {
+        SkylineMatrix matrix = new SkylineMatrix(scanner, n);
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                double sum = 0;
+                if (i <= j) {
+                    for (int k = 1; k <= i - 1; k++) {
+                        sum += matrix.get(i, k) * matrix.get(k, j);
                     }
+                    double aij = matrix.get(i, j);
+                    matrix.set(i, j, aij - sum);
+                } else {
+                    for (int k = 1; k <= j - 1; k++) {
+                        sum += matrix.get(i, k) * matrix.get(k, j);
+                    }
+                    double aij = matrix.get(i, j);
+                    double ujj = matrix.get(j, j);
+                    matrix.set(i, j, (aij - sum) / ujj);
                 }
             }
-            return matrix;
-        } catch (IOException e) {
-            throw new MatrixException("Cannot perform LU-decomposiotion", e);
         }
+        return matrix;
     }
 
     @Override
