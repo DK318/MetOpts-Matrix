@@ -19,9 +19,9 @@ public class LSSolversTest {
     private final double UPPER = 10;
     private final double EPS = 1e-7;
 
-    Path createSkylineTask() {
-        TaskGenerator generator = new TaskGenerator(SEED, LOWER, UPPER);
+    TaskGenerator generator = new TaskGenerator(SEED, LOWER, UPPER);
 
+    Path createSkylineTask() {
         Path output;
         try {
             output = Files.createTempFile(null, null);
@@ -30,7 +30,7 @@ public class LSSolversTest {
         }
 
         try {
-            generator.generate(4, output);
+            generator.generate(250, output);
         } catch (GeneratorException e) {
             throw new AssertionError(e);
         }
