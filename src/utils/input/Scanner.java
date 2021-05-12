@@ -1,4 +1,4 @@
-package utils;
+package utils.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;

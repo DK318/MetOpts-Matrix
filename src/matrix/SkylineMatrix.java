@@ -1,7 +1,7 @@
 package matrix;
 
 import matrix.exception.MatrixException;
-import utils.Scanner;
+import utils.input.Scanner;
 
 import java.io.IOException;
 
