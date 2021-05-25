@@ -43,6 +43,11 @@ public class MatrixTest {
     }
 
     @Test
+    void sparseMatrixTest2() throws IOException, MatrixException {
+        testSample(Path.of("samples/sample2.txt"));
+    }
+
+    @Test
     void sparseMatrixRandomTest() throws IOException, GeneratorException, MatrixException {
         for (int i = 3; i < 20; i++) {
             Path output = generateSparseMatrix(i);

@@ -1,3 +1,4 @@
+import lssolvers.ConjugateGradientsSolver;
 import lssolvers.GaussSolver;
 import lssolvers.LUSolver;
 import matrix.DenseMatrix;
@@ -7,7 +8,7 @@ import matrix.SparseMatrix;
 import matrix.exception.MatrixException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import util.generator.SkylineMatrixGenerator;
+import util.generator.GradientTaskGenerator;
 import util.generator.TaskGenerator;
 import util.generator.exception.GeneratorException;
 import util.input.Scanner;
@@ -15,6 +16,7 @@ import util.input.Scanner;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class LSSolversTest {
     private final long SEED = 228;
@@ -23,6 +25,7 @@ public class LSSolversTest {
     private final double EPS = 1e-7;
 
     TaskGenerator generator = new TaskGenerator(SEED, LOWER, UPPER);
+    GradientTaskGenerator gradientGenerator = new GradientTaskGenerator(SEED, LOWER, UPPER);
 
     Path createSkylineTask() {
         Path output;
@@ -33,11 +36,17 @@ public class LSSolversTest {
         }
 
         try {
-            generator.generate(250, output);
+            generator.generate(5, output);
         } catch (GeneratorException e) {
             throw new AssertionError(e);
         }
 
+        return output;
+    }
+
+    Path createGradientTask(int n) throws IOException, GeneratorException {
+        Path output = Files.createTempFile(null, null);
+        gradientGenerator.generate(output, n);
         return output;
     }
 
@@ -98,6 +107,45 @@ public class LSSolversTest {
             throw new AssertionError("Cannot read from test file", e);
         } catch (MatrixException e) {
             throw new AssertionError(e);
+        }
+    }
+
+    @Test
+    void conjugateGradientsTest() throws IOException, GeneratorException {
+        Path output = createGradientTask(250);
+
+        try (Scanner scanner = new Scanner(output)) {
+            int n = scanner.nextInt();
+            SparseMatrix matrix = new SparseMatrix(scanner, n);
+            double[] solution = new double[n + 1];
+            for (int i = 1; i <= n; i++) {
+                solution[i] = scanner.nextDouble();
+            }
+            double[] b = new double[n + 1];
+            for (int i = 1; i <= n; i++) {
+                b[i] = scanner.nextDouble();
+            }
+            double[] gradientSolution = ConjugateGradientsSolver.solve(matrix, b, 1e-10, 1000000);
+            for (int i = 1; i <= n; i++) {
+                try {
+                    Assertions.assertTrue(Math.abs(solution[i] - gradientSolution[i]) < EPS);
+                } catch (AssertionError e) {
+                    System.out.println("Expected: " + Arrays.toString(solution));
+                    System.out.println("Actual: " + Arrays.toString(gradientSolution));
+                    throw e;
+                }
+            }
+        } catch (IOException e) {
+            throw new AssertionError("Cannot read from test file", e);
+        } catch (MatrixException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    @Test
+    void multipleGradientTest() throws IOException, GeneratorException {
+        for (int i = 0; i < 10; i++) {
+            conjugateGradientsTest();
         }
     }
 
