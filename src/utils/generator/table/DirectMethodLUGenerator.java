@@ -1,8 +1,10 @@
 package utils.generator.table;
 
 import lssolvers.LUSolver;
+import matrix.Matrix;
 import matrix.SkylineMatrix;
 import matrix.exception.MatrixException;
+import utils.decomposers.LUDecomposer;
 import utils.input.Scanner;
 
 import java.io.IOException;
@@ -54,7 +56,8 @@ public class DirectMethodLUGenerator extends Table {
 
     public double[] getResult(final int k, final Path matrixPath) throws IOException, MatrixException {
         buildMatrix(k, matrixPath);
-        double[] LUsolution = LUSolver.solve(SkylineMatrix.LUDecomposition(new Scanner(matrixPath), n), b);
+        Matrix matrix = new SkylineMatrix(new Scanner(matrixPath), n);
+        double[] LUsolution = LUSolver.solve(matrix, b);
         double[] ans = new double[2];
 
         ans[0] = Utils.norm(Utils.subVector(solution, LUsolution));

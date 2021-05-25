@@ -1,13 +1,15 @@
 package lssolvers;
 
-import matrix.SkylineMatrix;
+import matrix.Matrix;
+import utils.decomposers.LUDecomposer;
 
 public class LUSolver {
     private LUSolver() {
         // Only static method solve
     }
 
-    public static double[] solve(SkylineMatrix matrix, double[] b) {
+    public static double[] solve(Matrix matrix, double[] b) {
+        LUDecomposer.decompose(matrix);
         int n = matrix.getN();
 
         double[] y = new double[n + 1];

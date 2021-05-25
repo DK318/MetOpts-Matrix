@@ -1,6 +1,6 @@
 package lssolvers;
 
-import matrix.DenseMatrix;
+import matrix.AbstractMatrix;
 import matrix.Matrix;
 
 import java.util.Arrays;
@@ -10,8 +10,8 @@ public class GaussSolver {
         // Only static method solve
     }
 
-    public static int solve(DenseMatrix denseMatrix, double[] b, double[] result, double eps) {
-        GaussMatrix matrix = new GaussMatrix(denseMatrix, b);
+    public static int solve(Matrix denseMatrix, double[] b, double[] result, double eps) {
+        Matrix matrix = new GaussMatrix(denseMatrix, b);
 
         int n = matrix.getN();
         int m = matrix.getM() - 1;
@@ -72,11 +72,11 @@ public class GaussSolver {
         return 1;
     }
 
-    private static class GaussMatrix implements Matrix {
-        private final DenseMatrix matrix;
+    private static class GaussMatrix extends AbstractMatrix {
+        private final Matrix matrix;
         private final double[] b;
 
-        public GaussMatrix(DenseMatrix matrix, double[] b) {
+        public GaussMatrix(Matrix matrix, double[] b) {
             this.matrix = matrix;
             this.b = b;
         }
@@ -90,6 +90,7 @@ public class GaussSolver {
             }
         }
 
+        @Override
         public void set(int i, int j, double val) {
             if (j > matrix.getM()) {
                 b[i] = val;

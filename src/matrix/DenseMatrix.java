@@ -5,7 +5,7 @@ import utils.input.Scanner;
 
 import java.io.IOException;
 
-public class DenseMatrix implements Matrix {
+public class DenseMatrix extends AbstractMatrix {
     private final double[][] data;
     private final int n;
     private final int m;
@@ -31,6 +31,7 @@ public class DenseMatrix implements Matrix {
         return data[i][j];
     }
 
+    @Override
     public void set(int i, int j, double val) {
         data[i][j] = val;
     }

@@ -1,6 +1,7 @@
 import lssolvers.GaussSolver;
 import lssolvers.LUSolver;
 import matrix.DenseMatrix;
+import matrix.Matrix;
 import matrix.SkylineMatrix;
 import matrix.exception.MatrixException;
 import org.junit.jupiter.api.Assertions;
@@ -44,7 +45,7 @@ public class LSSolversTest {
 
         try (Scanner scanner = new Scanner(output)) {
             int n = scanner.nextInt();
-            SkylineMatrix matrix = SkylineMatrix.LUDecomposition(scanner, n);
+            Matrix matrix = new SkylineMatrix(scanner, n);
             double[] solution = new double[n + 1];
             for (int i = 1; i <= n; i++) {
                 solution[i] = scanner.nextDouble();

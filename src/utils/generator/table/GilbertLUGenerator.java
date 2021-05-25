@@ -39,8 +39,8 @@ public class GilbertLUGenerator extends Table {
 
     public double[] getResult(final Path matrixPath) throws IOException, MatrixException {
         buildMatrix(matrixPath);
-        SkylineMatrix decomposed = SkylineMatrix.LUDecomposition(new Scanner(matrixPath), n);
-        double[] LUsolution = LUSolver.solve(decomposed, b);
+        Matrix matrix = new SkylineMatrix(new Scanner(matrixPath), n);
+        double[] LUsolution = LUSolver.solve(matrix, b);
         double[] ans = new double[2];
 
         ans[0] = Utils.norm(Utils.subVector(solution, LUsolution));

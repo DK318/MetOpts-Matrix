@@ -5,7 +5,7 @@ import utils.input.Scanner;
 
 import java.io.IOException;
 
-public class SkylineMatrix implements Matrix {
+public class SkylineMatrix extends AbstractMatrix {
     private final int n;
     private final double[] di;
     private final double[] al;
@@ -108,7 +108,8 @@ public class SkylineMatrix implements Matrix {
         return n;
     }
 
-    private void set(int i, int j, double val) {
+    @Override
+    public void set(int i, int j, double val) {
         if (i == j) {
             di[i] = val;
         } else if (i > j) {
@@ -124,42 +125,5 @@ public class SkylineMatrix implements Matrix {
                 au[ia[j] + i - start] = val;
             }
         }
-    }
-
-    public static SkylineMatrix LUDecomposition(Scanner scanner, int n) throws MatrixException {
-        SkylineMatrix matrix = new SkylineMatrix(scanner, n);
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                double sum = 0;
-                if (i <= j) {
-                    for (int k = 1; k <= i - 1; k++) {
-                        sum += matrix.get(i, k) * matrix.get(k, j);
-                    }
-                    double aij = matrix.get(i, j);
-                    matrix.set(i, j, aij - sum);
-                } else {
-                    for (int k = 1; k <= j - 1; k++) {
-                        sum += matrix.get(i, k) * matrix.get(k, j);
-                    }
-                    double aij = matrix.get(i, j);
-                    double ujj = matrix.get(j, j);
-                    matrix.set(i, j, (aij - sum) / ujj);
-                }
-            }
-        }
-        return matrix;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                builder.append(get(i, j))
-                        .append(" ");
-            }
-            builder.append('\n');
-        }
-        return builder.toString();
     }
 }
