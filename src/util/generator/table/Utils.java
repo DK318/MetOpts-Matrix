@@ -1,4 +1,4 @@
-package utils.generator.table;
+package util.generator.table;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package utils.generator;
+package util.generator;
 
 import java.nio.file.Path;
 

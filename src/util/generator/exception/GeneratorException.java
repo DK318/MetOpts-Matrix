@@ -1,4 +1,4 @@
-package utils.generator.exception;
+package util.generator.exception;
 
 public class GeneratorException extends Exception {
     public GeneratorException() {

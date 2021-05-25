@@ -1,12 +1,10 @@
-package utils.generator.table;
+package util.generator.table;
 
-import lssolvers.GaussSolver;
 import lssolvers.LUSolver;
-import matrix.DenseMatrix;
 import matrix.Matrix;
 import matrix.SkylineMatrix;
 import matrix.exception.MatrixException;
-import utils.input.Scanner;
+import util.input.Scanner;
 
 import java.io.IOException;
 import java.nio.file.Path;

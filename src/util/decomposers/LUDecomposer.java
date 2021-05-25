@@ -1,4 +1,4 @@
-package utils.decomposers;
+package util.decomposers;
 
 import matrix.Matrix;
 

@@ -1,7 +1,7 @@
-package utils.generator;
+package util.generator;
 
-import utils.generator.exception.GeneratorException;
-import utils.input.Scanner;
+import util.generator.exception.GeneratorException;
+import util.input.Scanner;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -1,15 +1,13 @@
-package utils.generator.table;
+package util.generator.table;
 
 import lssolvers.LUSolver;
 import matrix.Matrix;
 import matrix.SkylineMatrix;
 import matrix.exception.MatrixException;
-import utils.decomposers.LUDecomposer;
-import utils.input.Scanner;
+import util.input.Scanner;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.stream.IntStream;
 
 public class DirectMethodLUGenerator extends Table {
     public DirectMethodLUGenerator(int n) {

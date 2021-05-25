@@ -1,12 +1,9 @@
-package utils.generator;
+package util.generator;
 
-import utils.generator.exception.GeneratorException;
+import util.generator.exception.GeneratorException;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public class SkylineMatrixGenerator extends AbstractGenerator {
     public SkylineMatrixGenerator(long seed, double lower, double upper) {

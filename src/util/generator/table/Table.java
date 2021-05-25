@@ -1,9 +1,4 @@
-package utils.generator.table;
-
-import lssolvers.LUSolver;
-import matrix.SkylineMatrix;
-import matrix.exception.MatrixException;
-import utils.input.Scanner;
+package util.generator.table;
 
 import java.io.IOException;
 import java.nio.file.Files;

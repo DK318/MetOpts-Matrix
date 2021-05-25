@@ -3,12 +3,14 @@ import lssolvers.LUSolver;
 import matrix.DenseMatrix;
 import matrix.Matrix;
 import matrix.SkylineMatrix;
+import matrix.SparseMatrix;
 import matrix.exception.MatrixException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import utils.generator.TaskGenerator;
-import utils.generator.exception.GeneratorException;
-import utils.input.Scanner;
+import util.generator.SkylineMatrixGenerator;
+import util.generator.TaskGenerator;
+import util.generator.exception.GeneratorException;
+import util.input.Scanner;
 
 import java.io.IOException;
 import java.nio.file.Files;

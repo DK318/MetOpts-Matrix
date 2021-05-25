@@ -1,7 +1,7 @@
 package lssolvers;
 
 import matrix.Matrix;
-import utils.decomposers.LUDecomposer;
+import util.decomposers.LUDecomposer;
 
 public class LUSolver {
     private LUSolver() {
